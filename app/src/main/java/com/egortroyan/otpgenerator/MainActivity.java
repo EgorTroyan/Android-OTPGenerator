@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listAdapter = new ListAdapter(MainActivity.this, passList);
         binding.listview.setAdapter(listAdapter);
         binding.listview.setClickable(true);
+
         binding.listview.setOnItemClickListener((adapterView, view, i, l) -> {
 
             TextView textView = view.findViewById(R.id.get_otp);
@@ -144,13 +145,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Gson gson = new Gson();
             if (jsonE != null) {
                 EPass pass = gson.fromJson(jsonE, EPass.class);
-                ePassList.add(pass);
+                //ePassList.add(pass);
+                //passList.addAll(ePassList);
+                passList.add(pass);
             }
             if (jsonT != null) {
                 TPass pass = gson.fromJson(jsonT, TPass.class);
-                tPassList.add(pass);
+                //tPassList.add(pass);
+                //passList.addAll(tPassList);
+                passList.add(pass);
             }
             saveListToSettings();
+            listAdapter.notifyDataSetChanged();
         }
         if(requestCode == 2){
             if(resultCode == RESULT_OK){
